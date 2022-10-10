@@ -24,7 +24,7 @@ VSCode PDF Viewer forked from [tomoki1207/vscode-pdfviewer](https://github.com/t
   - pdfPreview.ts<br>
     Provides WebView implementation.
   - pdfProvider.ts<br>
-    Custom class extends `CustomReadonlyEditorProvidor`.
+    Custom class extends `CustomReadonlyEditorProvider`.
 - lib
   - pdfjs<br>
     PDF.js
