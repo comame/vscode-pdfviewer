@@ -76,7 +76,7 @@ export class PdfPreview extends Disposable {
     this.update();
   }
 
-  private reload(): void {
+  public reload(): void {
     if (this._previewState !== 'Disposed') {
       this.webviewEditor.webview.postMessage({ type: 'reload' });
     }
@@ -98,14 +98,14 @@ export class PdfPreview extends Disposable {
     const webview = this.webviewEditor.webview;
     const docPath = webview.asWebviewUri(this.resource);
     const cspSource = webview.cspSource;
-    const resolveAsUri = (...p: string[]): vscode.Uri => {
+    const resolveAsWebviewUri = (...p: string[]): vscode.Uri => {
       const uri = vscode.Uri.file(path.join(this.extensionRoot.path, ...p));
       return webview.asWebviewUri(uri);
     };
 
     const config = vscode.workspace.getConfiguration('pdf-preview');
     const settings = {
-      cMapUrl: resolveAsUri('lib', 'pdfjs', 'web', 'cmaps/').toString(),
+      cMapUrl: resolveAsWebviewUri('lib', 'pdfjs', 'web', 'cmaps/').toString(),
       path: docPath.toString(),
       defaults: {
         cursor: config.get('default.cursor') as string,
@@ -160,13 +160,13 @@ export class PdfPreview extends Disposable {
     <meta id="pdf-preview-config" data-config="${escapeAttribute(
           JSON.stringify(settings)
         )}">
-    <link rel="resource" type="application/l10n" href="${resolveAsUri('lib', 'pdfjs', 'web', 'locale', 'locale.properties')}">
-    <link rel="stylesheet" href="${resolveAsUri('lib', 'pdfjs', 'web', 'viewer.css')}">
-    <link rel="stylesheet" href="${resolveAsUri('lib', 'webview', 'pdf.css')}">
-    <script src="${resolveAsUri('lib', 'pdfjs', 'build', 'pdf.js')}"></script>
-    <script src="${resolveAsUri('lib', 'pdfjs', 'build', 'pdf.worker.js')}"></script>
-    <script src="${resolveAsUri('lib', 'pdfjs', 'web', 'viewer.js')}"></script>
-    <script src="${resolveAsUri('lib', 'webview', 'main.js')}"></script>
+    <link rel="resource" type="application/l10n" href="${resolveAsWebviewUri('lib', 'pdfjs', 'web', 'locale', 'locale.properties')}">
+    <link rel="stylesheet" href="${resolveAsWebviewUri('lib', 'pdfjs', 'web', 'viewer.css')}">
+    <link rel="stylesheet" href="${resolveAsWebviewUri('lib', 'webview', 'pdf.css')}">
+    <script src="${resolveAsWebviewUri('lib', 'pdfjs', 'build', 'pdf.js')}"></script>
+    <script src="${resolveAsWebviewUri('lib', 'pdfjs', 'build', 'pdf.worker.js')}"></script>
+    <script src="${resolveAsWebviewUri('lib', 'pdfjs', 'web', 'viewer.js')}"></script>
+    <script src="${resolveAsWebviewUri('lib', 'webview', 'main.js')}"></script>
 
       </head>
 

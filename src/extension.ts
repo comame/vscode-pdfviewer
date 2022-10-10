@@ -3,20 +3,36 @@ import { PdfCustomProvider } from './pdfProvider';
 
 export function activate(context: vscode.ExtensionContext): void {
   const extensionRoot = vscode.Uri.file(context.extensionPath);
-  // Register our custom editor provider
-  const provider = new PdfCustomProvider(extensionRoot);
-  context.subscriptions.push(
-    vscode.window.registerCustomEditorProvider(
-      PdfCustomProvider.viewType,
-      provider,
-      {
-        webviewOptions: {
-          enableFindWidget: false, // default
-          retainContextWhenHidden: true,
-        },
-      }
-    )
-  );
+
+  const pdfCustomProvider = new PdfCustomProvider(extensionRoot);
+  const customEditorProvider = vscode.window.registerCustomEditorProvider(
+    PdfCustomProvider.viewType,
+    pdfCustomProvider,
+    {
+      webviewOptions: {
+        enableFindWidget: false, // default
+        retainContextWhenHidden: true,
+      },
+    }
+  )
+
+  const reloadCommand = vscode.commands.registerCommand('dev.comame.code-pdf.reload', () => {
+    pdfCustomProvider.reload()
+  })
+
+  const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
+  statusBar.command = 'dev.comame.code-pdf.reload'
+  statusBar.text = '$(refresh) Reload PDF'
+
+  pdfCustomProvider.addStateChangeHandler((num) => {
+    if (num == 0) {
+      statusBar.hide()
+    } else {
+      statusBar.show()
+    }
+  })
+
+  context.subscriptions.push(customEditorProvider, reloadCommand, statusBar);
 }
 
 export function deactivate(): void {}

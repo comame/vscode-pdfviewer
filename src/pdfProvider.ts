@@ -6,11 +6,22 @@ export class PdfCustomProvider implements vscode.CustomReadonlyEditorProvider {
 
   private readonly _previews = new Set<PdfPreview>();
   private _activePreview: PdfPreview | undefined;
+  private _stateChangeHandlers: ((instances: number) => void)[] = [];
 
   constructor(private readonly extensionRoot: vscode.Uri) {}
 
   public openCustomDocument(uri: vscode.Uri): vscode.CustomDocument {
     return { uri, dispose: (): void => {} };
+  }
+
+  public reload() {
+    this._previews.forEach(preview => {
+      preview.reload()
+    })
+  }
+
+  public addStateChangeHandler(handler: (instances: number) => void) {
+    this._stateChangeHandlers.push(handler)
   }
 
   public async resolveCustomEditor(
@@ -24,9 +35,15 @@ export class PdfCustomProvider implements vscode.CustomReadonlyEditorProvider {
     );
     this._previews.add(preview);
     this.setActivePreview(preview);
+    for (const handler of this._stateChangeHandlers) {
+      handler(this._previews.size)
+    }
 
     webviewEditor.onDidDispose(() => {
       this._previews.delete(preview);
+      for (const handler of this._stateChangeHandlers) {
+        handler(this._previews.size)
+      }
     });
 
     webviewEditor.onDidChangeViewState(() => {

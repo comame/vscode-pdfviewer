@@ -32,6 +32,10 @@
         "supported": true
       }
     },
+    "commands": [{
+      "command": "dev.comame.code-pdf.reload",
+      "title": "Reload PDF File"
+    }],
     "customEditors": [
       {
         "viewType": "pdf.preview",

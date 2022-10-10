@@ -1,4 +1,15 @@
-# pdf
+# VSCode PDF Viewer
+
+VSCode PDF Viewer forked from [tomoki1207/vscode-pdfviewer](https://github.com/tomoki1207/vscode-pdfviewer).
+
+## Changes from original
+
+- Update PDF.js to v2.16.105
+- Add reload button in status bar
+
+---
+
+# pdf (Original README.md)
 
 Display pdf in VSCode.
 
