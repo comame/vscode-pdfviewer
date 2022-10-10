@@ -130,6 +130,7 @@ export class PdfPreview extends Disposable {
 <title>PDF.js viewer</title>
 <link rel="resource" type="application/l10n" href="${resolveAsUri(
       'lib',
+      'pdfjs',
       'web',
       'locale',
       'locale.properties'
