@@ -6,6 +6,7 @@ VSCode PDF Viewer forked from [tomoki1207/vscode-pdfviewer](https://github.com/t
 
 - Update PDF.js to v2.16.105
 - Add reload button in status bar
+- Make auto reloading configurable.
 
 ---
 

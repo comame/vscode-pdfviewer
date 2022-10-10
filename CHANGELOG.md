@@ -1,9 +1,13 @@
 # Changelog
 
+## Over 2.0.0
+- Forked by comame.
+- See README.md for changes.
+
 ## 1.1.0 (2020/07/13)
 
 - The issue about extension view is resolved.
-  + Remove message shown on loaded. 
+  + Remove message shown on loaded.
 - Support default viewer settings
   + cursor (**hand** or tool)
   + scale (**auto**, page-actual, etc...)

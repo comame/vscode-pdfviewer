@@ -54,23 +54,26 @@ export class PdfPreview extends Disposable {
       })
     );
 
-    const watcher = this._register(
-      vscode.workspace.createFileSystemWatcher(resource.fsPath)
-    );
-    this._register(
-      watcher.onDidChange((e) => {
-        if (e.toString() === this.resource.toString()) {
-          this.reload();
-        }
-      })
-    );
-    this._register(
-      watcher.onDidDelete((e) => {
-        if (e.toString() === this.resource.toString()) {
-          this.webviewEditor.dispose();
-        }
-      })
-    );
+    const autoReloadEnabled = vscode.workspace.getConfiguration('pdf-preview').get('default.autoReload') as boolean
+    if (autoReloadEnabled) {
+      const watcher = this._register(
+        vscode.workspace.createFileSystemWatcher(resource.fsPath)
+      );
+      this._register(
+        watcher.onDidChange((e) => {
+          if (e.toString() === this.resource.toString()) {
+            this.reload();
+          }
+        })
+      );
+      this._register(
+        watcher.onDidDelete((e) => {
+          if (e.toString() === this.resource.toString()) {
+            this.webviewEditor.dispose();
+          }
+        })
+      );
+    }
 
     this.webviewEditor.webview.html = this.getWebviewContents();
     this.update();
