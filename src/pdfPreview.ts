@@ -105,7 +105,7 @@ export class PdfPreview extends Disposable {
 
     const config = vscode.workspace.getConfiguration('pdf-preview');
     const settings = {
-      cMapUrl: resolveAsUri('lib', 'web', 'cmaps/').toString(),
+      cMapUrl: resolveAsUri('lib', 'pdfjs', 'web', 'cmaps/').toString(),
       path: docPath.toString(),
       defaults: {
         cursor: config.get('default.cursor') as string,
@@ -134,12 +134,12 @@ export class PdfPreview extends Disposable {
       'locale',
       'locale.properties'
     )}">
-<link rel="stylesheet" href="${resolveAsUri('lib', 'web', 'viewer.css')}">
-<link rel="stylesheet" href="${resolveAsUri('lib', 'pdf.css')}">
-<script src="${resolveAsUri('lib', 'build', 'pdf.js')}"></script>
-<script src="${resolveAsUri('lib', 'build', 'pdf.worker.js')}"></script>
-<script src="${resolveAsUri('lib', 'web', 'viewer.js')}"></script>
-<script src="${resolveAsUri('lib', 'main.js')}"></script>
+<link rel="stylesheet" href="${resolveAsUri('lib', 'pdfjs', 'web', 'viewer.css')}">
+<link rel="stylesheet" href="${resolveAsUri('lib', 'webview', 'pdf.css')}">
+<script src="${resolveAsUri('lib', 'pdfjs', 'build', 'pdf.js')}"></script>
+<script src="${resolveAsUri('lib', 'pdfjs', 'build', 'pdf.worker.js')}"></script>
+<script src="${resolveAsUri('lib', 'pdfjs', 'web', 'viewer.js')}"></script>
+<script src="${resolveAsUri('lib', 'webview', 'main.js')}"></script>
 </head>`;
 
     const body = `<body tabindex="1">
