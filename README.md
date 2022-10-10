@@ -12,6 +12,7 @@ VSCode PDF Viewer forked from [tomoki1207/vscode-pdfviewer](https://github.com/t
 
 1. Download newer version of PDF.js build from <https://mozilla.github.io/pdf.js/>.
 1. Extract PDF.js into `lib/pdfjs/`.
+1. Copy `lib/pdfjs/web/viewer.html` to `src/pdfViewerHtml.ts`.
 
 ## Project structure
 
