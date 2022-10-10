@@ -6,7 +6,29 @@ VSCode PDF Viewer forked from [tomoki1207/vscode-pdfviewer](https://github.com/t
 
 - Update PDF.js to v2.16.105
 - Add reload button in status bar
-- Make auto reloading configurable.
+- Make auto reloading configurable
+
+## How to update PDF.js
+
+1. Download newer version of PDF.js build from <https://mozilla.github.io/pdf.js/>.
+1. Extract PDF.js into `lib/pdfjs/`.
+
+## Project structure
+
+- src
+  - disposable.ts<br>
+    Wrapper library for `vscode.Disposable`
+  - extension.ts<br>
+    Entrypoint of extension.
+  - pdfPreview.ts<br>
+    Provides WebView implementation.
+  - pdfProvider.ts<br>
+    Custom class extends `CustomReadonlyEditorProvidor`.
+- lib
+  - pdfjs<br>
+    PDF.js
+  - webview<br>
+    Custom script runs in WebView.
 
 ---
 
@@ -18,7 +40,7 @@ Display pdf in VSCode.
 
 ## Contribute
 
-### Upgrade PDF.js
+### Upgrade PDF.js (Obsoleted)
 
 1. Download latest [Prebuilt](https://mozilla.github.io/pdf.js/getting_started/#download).
 1. Extract the ZIP file.
